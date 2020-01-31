@@ -5,7 +5,7 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 
 
-def answer_01(data):
+def answer_01(df):
     """
     Write a code which standardizes the column of given data EXCEPT THE LAST ONE !
 
@@ -18,9 +18,10 @@ def answer_01(data):
         scaled_data [pandas.DataFrame]: Rescaled data except last column
 
     """
-    # TODO : standardize data
-    scaled_data = data
-    return scaled_data
+    df_scaled = df.loc[:,df.columns[:-1]]
+    df_scaled = (df_scaled - df_scaled.mean()) / df_scaled.std()
+    df_scaled[df.columns[-1]] = df.loc[:, df.columns[-1]]
+    return df_scaled
 
 
 def answer_02():
